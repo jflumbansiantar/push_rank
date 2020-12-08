@@ -167,5 +167,4 @@ const shuffle = (str, l) => {
 
 
 let str1 = ['a', 'b', 'c'], l = 3
-
 shuffle(str1, l)
