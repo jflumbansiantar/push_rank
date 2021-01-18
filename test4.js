@@ -42,8 +42,8 @@ const prime = (n) => {
     // console.log(xj, '--j')
 }
 
-prime(10)
-prime(1000)
+// prime(10)
+// prime(1000)
 
 
 /**
@@ -219,4 +219,53 @@ const shuffle = (str, l) => {
 
 
 let str1 = ['a', 'b'], l = 3
-shuffle(str1, l)
+// shuffle(str1, l)
+
+//Fibonachi
+function fn(num) {
+
+    if (num === 1) {
+        return [0, 1]
+    } else {
+        let a = fn(num - 1);
+        a.push(a[a.length - 1] + a[a.length - 2]);
+        return a;
+    }
+}
+
+// console.log(fn(19))
+
+function FizzBuzz(n) {
+    console.time('Start');
+    for (let i = 1; i <= n; i++) {
+        switch (true) {
+            case i % 3 === 0 && i % 5 === 0:
+                console.log('FizzBuzz')
+                break;
+            case i % 3 === 0 :
+                console.log('Fizz')
+                break;
+            case i % 5 === 0:
+                console.log('Buzz')
+                break;
+            default:
+                console.log(i)
+                break;
+        }
+    }
+    console.timeEnd('Start');
+}
+
+function FizzBuzz1(n) {
+    console.time('Start');
+    for (let i = 1; i <= n; i++) {
+
+        console.log(
+            (i % 3 === 0) ? (i % 5 === 0) ? 'FizzBuzz' : 'Fizz' : (i % 5 === 0) ? 'Buzz' : i
+        );
+    }
+    console.timeEnd('Start');
+}
+
+// FizzBuzz(24)
+FizzBuzz1(24)

@@ -46,7 +46,7 @@ class Adult extends Person {
 }
 
 let adult1 = new Adult('Anika', 91, 'Female');
-// adult1.introduce()
+adult1.introduce()
 
 /**Encapsulation
  * We can hide some shades here :) ((if u know what I mean)). Anyway, we can choose some property to hide.
@@ -88,8 +88,8 @@ class Adults extends Human {
     }
 }
 
-let adult2 = new Adults('Anika', 91, 'Female');
-// adult2.talk();
+let adult2 = new Adults('Anika', 91, 'Female', false);
+adult2.introduce();
 
 /**Abstraction
  * This is the generalisation of an idea and its abstract(?)#notquiteundertandwhatitsmean
@@ -110,7 +110,7 @@ class Jobseeker extends Person {
         )
     }
 
-    proffesion() {
+    profesion() {
         if (this.status == true) {
             console.log('I am a programmer');
         } else {
@@ -121,8 +121,8 @@ class Jobseeker extends Person {
 }
 
 let adult3 = new Jobseeker('Andika Kangen Band', 29, 'Male')
-// adult3.introduce('--ini introduce')
-// adult3.proffesion('--ini proffesion')
+adult3.introduce('--ini introduce')
+adult3.profesion('--ini proffesion')
 
 /**Polymorphism
  * This class is a class that could have a lot of form of its child class. A bit different from its parent class.
@@ -156,7 +156,7 @@ const Music = Base => class extends Base {
     }
 }
 
-//then wwe make the child class
+//then we make the child class
 
 class Doctor extends PublicServer(Military(Person)) {
 
@@ -183,12 +183,12 @@ class Spy extends Music(Military(Person)) {
         super.got7()
         super.introduce()
         super.agent()
-        // super.save()
+
     }
 }
 
 let adult4 = new Doctor('Karin', 29, 'Female')
-// adult4.work()
+adult4.work()
 
 let adult5 = new Spy('Jack', 27, 'Male')
 adult5.work()
