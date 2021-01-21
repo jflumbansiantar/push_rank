@@ -225,15 +225,22 @@ let str1 = ['a', 'b'], l = 3
 function fn(num) {
 
     if (num === 1) {
-        return [0, 1]
+        console.log([0, 1]); 
     } else {
-        let a = fn(num - 1);
-        a.push(a[a.length - 1] + a[a.length - 2]);
-        return a;
+        let a = 0, b= 1, temp;
+        for (let i = 1; i <= num; i++) {
+            temp = a + b
+            b = a
+            a = temp
+            console.log (temp)
+        }
+        // let a = fn(num - 1);
+        // a.push(a[a.length - 1] + a[a.length - 2]);
+        // return a;
     }
 }
 
-// console.log(fn(19))
+// fn(15)
 
 function FizzBuzz(n) {
     console.time('Start');
@@ -268,4 +275,4 @@ function FizzBuzz1(n) {
 }
 
 // FizzBuzz(24)
-FizzBuzz1(24)
+// FizzBuzz1(24)

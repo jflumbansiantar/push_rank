@@ -4,66 +4,70 @@ var bar = '' + foo;
 
 let ribu = ['', 'ribu', 'juta', 'milyar']
 
-let satuan = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-let belas = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen']
-let puluhan = ['twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+let satuan = ['nol', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan'];
+let belasan = ['sepuluh', 'sebelas', 'belas']
+var sekala = [
+    { name: "triliun", size: 12 },
+    { name: "milyar", size: 9 },
+    { name: "juta", size: 6 },
+    { name: "ribu", size: 3 },
+    { name: "ratus", size: 2 },
+    { name: "puluh", size: 1 }
+    
+];
 
 function numberToString(l) {
-    // let nts = '' + l
-    // console.log(nts);
-    // console.log(typeof nts);
+    if (l != parseFloat(l)) return NaN;
+
+    let x = l.toString(), y = [], minNum = "";
+
+    for (let i = 0; i < sekala.length; i++) {
+        
+        if (x.length > sekala[i].size) { 
+        
+            var mag = x.length - sekala[i].size; 
+        
+            y.push(numberToString(x.substring(0, mag)) + " " + sekala[i].name); 
+            // console.log(numberToString(x.substring(0, mag)))
+        
+            x = x.substring(mag).replace(/^[0]+/, ' '); 
+        
+        } 
+	}
+
+    l = parseInt(x, 10);
     
-    l = l.toString();
-    l = l.replace(/[\, ]/g, '');
-    if (l != parseFloat(l)) {return 'not a number'};
+    if (l >= 20) {
+        let bP = satuan[Math.floor(l/10)] + ' ' + puluhan[0]
+        if (l % 10 !== 0) {
+            bP += ' ' + satuan[l % 10]
+        }
+        y.push(bP)
+        
+    } else if (l >= 10) {
+        if (l % 10 === 0) {
+            y.push(belasan[0])
+            
+        } else if (l % 10 === 1) {
+            y.push(belasan[1])
+            
+        } else {
+            let bilanganBelasan = satuan[l % 10] + ' ' + belasan[2]
+            y.push(bilanganBelasan)
+            
+        }
 
-    let x_val = l.indexOf('.');
-    if (x_val == -1) {
-        x_val = l.length //panjang angka
-    } else if (x_val > 15) {
-        return 'terlalu besar'
+    } else if (l >= 0) {
+        y.push(satuan[l])
     }
 
-    let n_val = l.split('');
-    var str_val = ''; //penampung bilangan 
-    var sk_val = 0;
+    let lastPart = y.pop()
 
-    for (let i = 0; i < x_val; i++) { //loop semua huruf dalam angka
-        if ((x_val - i) % 3 == 2) {
-            if (n_val[i] == '1') {
-                str_val += belas[Number(n_val[i + 1])] + ' ';
-                i++;
-                sk_val = 1;
-            } else if (n_val[i] != 0) {
-                str_val += puluhan[n_val[i] - 2] + ' ';
-                sk_val = 1;
-            } else if (n_val[i] != 0) {
-                str_val += dg_val[n_val[i]] + ' ';
-                if ((x_val - i) % 3 == 00) {
-                    str_val += 'ratus'
-                }
-                sk_val = 1;
-            }
-            if ((x_val - i) % 3 == 1) {
-                if (sk_val) {
-                    str_val += th_val[(x_val - i - 1) / 3] + ' ';
-                }
-                sk_val = 0;
-            }
-        }
-        if (x_val != l.length) {
-            let y_val = l.length;
-            str_val += 'point';
-            for (let i = x_val + 1; i < y_val; i++) {
-                str_val += satuan[n_val[i]] + ' ';
-            }
-        }
-    }
-    return str_val.replace(/\l+/g, ' ');
-
+    return minNum + (y.length > 0 ? y.join(',') + ' ' : '') + lastPart;
+    
 }
 
-// console.log(numberToString('900'))
+console.log(numberToString('34'))
 
 function sorting(array) {
     if (array.length <= 1) return array
@@ -71,7 +75,6 @@ function sorting(array) {
     
     for (let i = 0; i < array.length; i++) {
         for (let j = 0; j < array.length; j++) {
-            
             if (array[j - 1] > array[j]) {
                 [array[j - 1], array[j]] = [array[j], array[j - 1]];
             }
@@ -81,5 +84,4 @@ function sorting(array) {
 }
 let number = [90, 5, 64, 32, 1, 78, 29]
 let letter = ['f', 'a', 'e', 'b', 'd', 'z', 'h']
-let mix = [1, 'f', 9, 'a', 52, 'l', 8, 'k', 'l']
-console.log(sorting(mix))
+// console.log(sorting(letter))
